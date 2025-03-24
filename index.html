@@ -218,17 +218,6 @@
   </style>
 </head>
 <body>
-  <!-- Dialog Pertama Kali -->
-  <div class="dialog-overlay" id="dialog-overlay">
-    <div class="dialog">
-      <h2>HARAP DIBACA!</h2>
-      <p>
-        API key yang digunakan memiliki batas penggunaan harian. Jika limit habis, Anda harus menunggu hingga reset keesokan harinya. Pastikan untuk menggunakan API dengan bijak.
-      </p>
-      <button onclick="closeDialog()">Mengerti</button>
-    </div>
-  </div>
-
   <!-- Dialog Invalid URL -->
   <div class="dialog-overlay" id="invalid-url-dialog" style="display: none;">
     <div class="dialog">
@@ -261,20 +250,6 @@
   </footer>
 
   <script>
-    // Tampilkan dialog saat halaman dimuat
-    document.addEventListener('DOMContentLoaded', function () {
-      const dialogShown = localStorage.getItem('dialogShown');
-      if (!dialogShown) {
-        document.getElementById('dialog-overlay').style.display = 'flex';
-      }
-    });
-
-    // Tutup dialog pertama kali dan simpan status di localStorage
-    function closeDialog() {
-      document.getElementById('dialog-overlay').style.display = 'none';
-      localStorage.setItem('dialogShown', 'true');
-    }
-
     // Tampilkan dialog invalid URL
     function showInvalidUrlDialog() {
       document.getElementById('invalid-url-dialog').style.display = 'flex';
