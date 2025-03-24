@@ -109,6 +109,7 @@
     .about p {
       font-size: 1rem;
       color: #666;
+      margin-bottom: 20px;
     }
 
     /* Footer */
@@ -156,7 +157,7 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
+      max-width: 300px; /* Diperkecil ukurannya */
       width: 90%;
       animation: zoomIn 0.3s ease-in-out;
     }
@@ -171,24 +172,24 @@
     }
 
     .dialog h2 {
-      font-size: 1.5rem;
+      font-size: 1.2rem; /* Diperkecil ukuran font */
       margin-bottom: 10px;
       color: #ff4c4c;
     }
 
     .dialog p {
-      font-size: 1rem;
+      font-size: 0.9rem; /* Diperkecil ukuran font */
       color: #666;
       margin-bottom: 20px;
     }
 
     .dialog button {
-      padding: 10px 20px;
+      padding: 8px 16px; /* Diperkecil ukuran tombol */
       background: #ff4c4c;
       color: white;
       border: none;
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: 0.9rem; /* Diperkecil ukuran font */
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
@@ -217,7 +218,7 @@
   </style>
 </head>
 <body>
-  <!-- Dialog -->
+  <!-- Dialog Pertama Kali -->
   <div class="dialog-overlay" id="dialog-overlay">
     <div class="dialog">
       <h2>HARAP DIBACA!</h2>
@@ -225,6 +226,17 @@
         API key yang digunakan memiliki batas penggunaan harian. Jika limit habis, Anda harus menunggu hingga reset keesokan harinya. Pastikan untuk menggunakan API dengan bijak.
       </p>
       <button onclick="closeDialog()">Mengerti</button>
+    </div>
+  </div>
+
+  <!-- Dialog Invalid URL -->
+  <div class="dialog-overlay" id="invalid-url-dialog" style="display: none;">
+    <div class="dialog">
+      <h2>Invalid URL!</h2>
+      <p>
+        URL YouTube yang Anda masukkan tidak valid. Silakan cek kembali dan coba lagi.
+      </p>
+      <button onclick="closeInvalidUrlDialog()">Mengerti</button>
     </div>
   </div>
 
@@ -257,10 +269,20 @@
       }
     });
 
-    // Tutup dialog dan simpan status di localStorage
+    // Tutup dialog pertama kali dan simpan status di localStorage
     function closeDialog() {
       document.getElementById('dialog-overlay').style.display = 'none';
       localStorage.setItem('dialogShown', 'true');
+    }
+
+    // Tampilkan dialog invalid URL
+    function showInvalidUrlDialog() {
+      document.getElementById('invalid-url-dialog').style.display = 'flex';
+    }
+
+    // Tutup dialog invalid URL
+    function closeInvalidUrlDialog() {
+      document.getElementById('invalid-url-dialog').style.display = 'none';
     }
 
     // API Configuration
@@ -281,7 +303,7 @@
       const videoId = extractVideoId(videoUrl);
 
       if (!videoId) {
-        alert('Invalid YouTube URL. Please enter a valid link.');
+        showInvalidUrlDialog(); // Tampilkan dialog invalid URL
         return;
       }
 
