@@ -510,6 +510,7 @@
     <ul class="sidebar-menu">
       <li><a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> Home</a></li>
       <li><a href="#" id="about-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> About</a></li>
+      <li><a href="#" id="limits-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg> Usage Tips</a></li>
       <li>
         <a href="https://wa.me/447405258579?text=Saya%20punya%20saran%20%20atau laporkan bug(saran%20anda)" target="_blank">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -545,6 +546,24 @@
       </div>
       <div class="dialog-actions">
         <button class="dialog-btn" onclick="closeAboutDialog()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Limits Dialog -->
+  <div class="dialog-overlay" id="limits-dialog" style="display: none;">
+    <div class="dialog">
+      <div class="dialog-content">
+        <h2>Usage Limits</h2>
+        <p>To ensure fair usage for all users, AbiqMate has these limits:</p>
+        <div style="margin: 15px 0;">
+          <p><strong>300 conversions per month</strong></p>
+          <p><strong>1000 conversions per hour</strong></p>
+        </div>
+        <p>Check your remaining quota in your account dashboard.</p>
+      </div>
+      <div class="dialog-actions">
+        <button class="dialog-btn" onclick="closeLimitsDialog()">OK</button>
       </div>
     </div>
   </div>
@@ -620,12 +639,30 @@
       document.getElementById('about-dialog').style.display = 'none';
     }
 
+    // Show limits dialog
+    function showLimitsDialog() {
+      document.getElementById('limits-dialog').style.display = 'flex';
+    }
+
+    // Close limits dialog
+    function closeLimitsDialog() {
+      document.getElementById('limits-dialog').style.display = 'none';
+    }
+
     // Add click event to about button in sidebar
     document.getElementById('about-btn').addEventListener('click', function(e) {
       e.preventDefault();
       sidebar.classList.remove('open');
       sidebarOverlay.classList.remove('open');
       showAboutDialog();
+    });
+
+    // Add click event to limits button in sidebar
+    document.getElementById('limits-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('open');
+      showLimitsDialog();
     });
 
     // API Configuration
